@@ -21,7 +21,7 @@ const router = createBrowserRouter(
       </Route>
 
       <Route 
-      loader={githubLoader}
+      loader={githubLoader  }
       path='github'
       element={<Github/>}/>
       <Route path='*' element={<div> Not Found</div>}/>
