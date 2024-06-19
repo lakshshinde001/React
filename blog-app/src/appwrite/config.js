@@ -106,4 +106,13 @@ export class Service {
             return false;
         }
     }
+    getFilePreview(fileId){
+        return this.bucket.getFilePreview(
+            conf.appWriteBucketId,
+            fileId
+        ).href
+    }
 }
+
+const service = new Service();
+export default service;
