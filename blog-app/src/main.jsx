@@ -41,7 +41,7 @@ const router = createBrowserRouter([
         )
       },
       {
-        path : "/allposts",
+        path : "/all-posts",
         element : (
           <Protected authentication= {true}>
             <AllPosts/>
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         )
       },
       {
-        path: "/add-posts",
+        path: "/add-post",
         element : (
           <Protected authentication>
             <AddPosts/>
