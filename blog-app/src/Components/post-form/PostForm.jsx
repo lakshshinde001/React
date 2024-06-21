@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react'
+import React, {useCallback, useId} from 'react'
 import {set, useForm} from 'react-hook-form'
 import Button from '../Button.jsx'
 import Input from '../Input.jsx'
@@ -20,7 +20,31 @@ export default function PostForm ({post}){
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
   const submit = async (data) => {
+    if(post){
+      const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null
 
+      if(file){
+        appwriteService.deletFile(data.featuredImage)
+      }
+      const dbPost = await appwriteService.updatePost(
+        post.$id,
+        {...data,
+        featuredImage : file? file.$id : undefined}
+      )
+      if(dbPost){
+        navigate(`/post/${dbPost.$id}`)
+      }
+    }else{
+      const file = await appwriteService.uploadFile(data.image[0])
+      if(file){
+        const fileId = file.$id
+        data.featuredImage = fileId;
+        const dbPost = await appwriteService.createPost({...data, useId : userData.$id})
+        if(dbPost){
+          navigate(`/post/${dbPost.$id}`)
+        }
+      }
+    }
   }
   const slugTransform = useCallback((value) => {
     if(value && typeof value === 'string'){
@@ -85,7 +109,7 @@ export default function PostForm ({post}){
           <Button
             type='submit'
             bgColor={post? "bg-green-500" : undefined}
-
+            className='w-full'
           > 
            {post ? "Update" : "Submit"}
           </Button>
