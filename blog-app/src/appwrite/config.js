@@ -8,8 +8,8 @@ export class Service {
 
     constructor(){
         this.client
-        .setEndpoint(conf.appWriteUrl)
-        .setProject(conf.appWriteProjectId)
+        .setEndpoint('https://cloud.appwrite.io/v1')
+        .setProject('6670f9f800279f77d16a')
         this.databases = new Databases(this.client);
         this.bucket = new Storage(this.client);
     }
@@ -17,8 +17,8 @@ export class Service {
     async getPost(slug){
         try {
             return await this.databases.getDocument(
-                conf.appWriteDatabaseId, 
-                conf.appWriteCollectionsId,
+                '6670fb9400050f5850fe', 
+                '6670fbb70019912f51a5',
                 slug
             )
         } catch (error) {
@@ -30,8 +30,8 @@ export class Service {
     async getPosts(queries = [Query.equal("status", "active")]){
         try {
            return await this.databases.listDocuments(
-                conf.appWriteDatabaseId,
-                conf.appWriteCollectionsId,
+                '6670fb9400050f5850fe',
+                '6670fbb70019912f51a5',
                 queries)
     
         } catch (error) {
@@ -43,8 +43,8 @@ export class Service {
     async createPost({title, slug, content, featuredImage, status, userId}){
         try {
             return await this.databases.createDocument(
-                conf.appWriteDatabaseId,
-                conf.appWriteCollectionsId,
+                '6670fb9400050f5850fe',
+                '6670fbb70019912f51a5',
                 slug,
                 {
                     title, content, featuredImage, status, userId
@@ -58,8 +58,8 @@ export class Service {
     async updatePost(slug, {title, content, featuredImage, status}){
         try {
             return await this.databases.updateDocument(
-                conf.appWriteDatabaseId,
-                conf.appWriteCollectionsId,
+                '6670fb9400050f5850fe',
+                '6670fbb70019912f51a5',
                 slug,
                 {
                     title,  content, featuredImage, status
@@ -73,8 +73,8 @@ export class Service {
     async deletePost(slug){
         try {
              await this.databases.deleteDocument(
-                conf.appWriteDatabaseId,
-                conf.appWriteCollectionsId,
+                '6670fb9400050f5850fe',
+                '6670fbb70019912f51a5',
                 slug,  
             )
             return true;
@@ -86,7 +86,7 @@ export class Service {
     async uploadFile(file){
         try {
             return await this.bucket.createFile(
-                conf.appWriteBucketId,
+                '6670fd5900109142abe9',
                 ID.unique(),
                 file
             )
@@ -98,7 +98,7 @@ export class Service {
     async deletFile(fileId){
         try {
             return this.bucket.deleteFile(
-                conf.appWriteBucketId,
+                '6670fd5900109142abe9',
                 fileId
             )
         } catch (error) {
@@ -108,7 +108,7 @@ export class Service {
     }
     getFilePreview(fileId){
         return this.bucket.getFilePreview(
-            conf.appWriteBucketId,
+            '6670fd5900109142abe9',
             fileId
         ).href
     }

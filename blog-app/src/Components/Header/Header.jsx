@@ -1,6 +1,6 @@
 import React from 'react'
-import {Container} from '../Container/Container.jsx'
-import {Logo} from '../Logo.jsx'
+import Container from '../Container/Container.jsx'
+import Logo from '../Logo.jsx'
 import {Link} from 'react-router-dom'
 import LogoutBtn from './LogoutBtn.jsx'
 import { useNavigate } from 'react-router-dom'

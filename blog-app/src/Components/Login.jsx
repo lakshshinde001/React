@@ -7,7 +7,7 @@ import authService from "../appwrite/auth";
 import { login as authLogin } from "../Store/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
+import { Link } from "react-router-dom";
 
 export default function Login () {
     const dispatch = useDispatch();
@@ -27,6 +27,7 @@ export default function Login () {
                     dispatch(authLogin(userData))
                 }
             }
+            console.log("Error while loggin");
         } catch (error) {
             setError(error.message)
         }

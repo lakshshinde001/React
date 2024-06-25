@@ -7,9 +7,13 @@ export class AuthService{
     account;
 
     constructor(){
+
+        // console.log('AppWrite URL:', conf.appWriteUrl); // Log the URL
+        // console.log(conf.appWriteDatabaseId);
+
         this.client
-        .setEndpoint(conf.appWriteUrl)
-        .setProject(conf.appWriteProjectId)
+        .setEndpoint('https://cloud.appwrite.io/v1')
+        .setProject('6670f9f800279f77d16a')
         this.account = new Account(this.client)
     }
     async createAccount ({email, password,name}){
@@ -21,7 +25,7 @@ export class AuthService{
                 return userAccount
             }
         } catch (error){
-            throw error;
+            console.log(error.message);;
         }
     }
     async login({email, password}){
